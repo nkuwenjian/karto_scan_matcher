@@ -12,7 +12,7 @@ catkin_package(
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS})
-add_library(karto_scan_macther SHARED src/ScanMatcher.cpp src/Mapper.cpp)
+add_library(karto_scan_macther SHARED src/Mapper.cpp)
 target_link_libraries(karto_scan_macther ${Boost_LIBRARIES})
 
 install(DIRECTORY include/ DESTINATION include)

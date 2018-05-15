@@ -1,5 +1,5 @@
-#ifndef _DATA_STRUCTURE_H_
-#define _DATA_STRUCTURE_H_
+#ifndef KARTO_SCAN_MATCHER_DATA_STRUCTURE_H_
+#define KARTO_SCAN_MATCHER_DATA_STRUCTURE_H_
 
 #include <karto_scan_matcher/Math.h>
 #include <karto_scan_matcher/Macros.h>
@@ -1240,4 +1240,4 @@ private:
   
 }  // namespace KartoScanMatcher
 
-#endif  // _DATA_STRUCTURE_H_
+#endif  // KARTO_SCAN_MATCHER_DATA_STRUCTURE_H_

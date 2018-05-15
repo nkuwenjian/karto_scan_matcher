@@ -1,5 +1,5 @@
-#ifndef _CORRELATION_GRID_H_
-#define _CORRELATION_GRID_H_
+#ifndef KARTO_SCAN_MATCHER_CORRELATION_GRID_H_
+#define KARTO_SCAN_MATCHER_CORRELATION_GRID_H_
 
 #include <karto_scan_matcher/Grid.h>
 #include <karto_scan_matcher/DataStructure.h>
@@ -92,7 +92,7 @@ public:
       return;
     }
 
-    kt_int32s halfKernel = m_KernelSize / 2;  // m_KernelSize = 13, halfKernel = 6
+    kt_int32s halfKernel = m_KernelSize / 2;
 
     // apply kernel
     for (kt_int32s j = -halfKernel; j <= halfKernel; j++)
@@ -235,4 +235,4 @@ private:
 
 }  // namespace KartoScanMatcher
 
-#endif  // _CORRELATION_GRID_H_
+#endif  // KARTO_SCAN_MATCHER_CORRELATION_GRID_H_

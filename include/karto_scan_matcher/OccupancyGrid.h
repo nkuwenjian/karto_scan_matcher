@@ -1,5 +1,5 @@
-#ifndef _OCCUPANCY_GRID_H_
-#define _OCCUPANCY_GRID_H_
+#ifndef KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H_
+#define KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H_
 
 #include <karto_scan_matcher/DataStructure.h>
 #include <karto_scan_matcher/Grid.h>
@@ -432,4 +432,4 @@ private:
   
 }  // namespace KartoScanMatcher
 
-#endif  // _OCCUPANCY_GRID_H_
+#endif  // KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H_

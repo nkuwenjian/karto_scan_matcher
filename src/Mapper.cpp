@@ -24,7 +24,6 @@ namespace KartoScanMatcher
   ////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////////
   
-  
   ScanMatcher::~ScanMatcher()
   {
     delete m_pCorrelationGrid;
@@ -32,10 +31,6 @@ namespace KartoScanMatcher
     delete m_pGridLookup;
   }
   
-  // searchSize = 0.3
-  // resolution = 0.01
-  // smearDeviation = 0.03
-  // rangeThreshold = 12.0
   ScanMatcher* ScanMatcher::Create(Mapper* pMapper, kt_double searchSize, kt_double resolution,
                                    kt_double smearDeviation, kt_double rangeThreshold)
   {
@@ -60,15 +55,12 @@ namespace KartoScanMatcher
     assert(math::DoubleEqual(math::Round(searchSize / resolution), (searchSize / resolution)));
     
     // calculate search space in grid coordinates
-    // searchSpaceSideSize = 31
     kt_int32u searchSpaceSideSize = static_cast<kt_int32u>(math::Round(searchSize / resolution) + 1);  
     
     // compute requisite size of correlation grid (pad grid so that scan points can't fall off the grid
     // if a scan is on the border of the search space)
-    // pointReadingMargin = 1200
     kt_int32u pointReadingMargin = static_cast<kt_int32u>(ceil(rangeThreshold / resolution));  
     
-    // gridSize = 2431
     kt_int32s gridSize = searchSpaceSideSize + 2 * pointReadingMargin;
     
     // create correlation grid
@@ -144,23 +136,15 @@ namespace KartoScanMatcher
                                           0.5 * (searchDimensions.GetY() - 1) * m_pCorrelationGrid->GetResolution());
     
     // a coarse search only checks half the cells in each dimension
-    // coarseSearchResolution = (0.02, 0.02)
     Vector2<kt_double> coarseSearchResolution(2 * m_pCorrelationGrid->GetResolution(),
                                               2 * m_pCorrelationGrid->GetResolution());
     
     // actual scan-matching
-    // m_pCoarseSearchAngleOffset = 20 degree
-    // m_pCoarseAngleResolution = 2 degree
     kt_double bestResponse = CorrelateScan(pScan, scanPose, coarseSearchOffset, coarseSearchResolution,
                                            m_pMapper->getParamCoarseSearchAngleOffset(),
                                            m_pMapper->getParamCoarseAngleResolution(),
                                            doPenalize, rMean, rCovariance, false);
-
     
-    // fineSearchOffset = (0.01, 0.01)
-    // fineSearchResolution = (0.01, 0.01)
-    // m_pFineSearchAngleOffset = 1 degree
-    // m_pFineSearchAngleResolution = 0.2 degree
     if (doRefineMatch)
     {
       Vector2<kt_double> fineSearchOffset(coarseSearchResolution * 0.5);
@@ -358,7 +342,7 @@ namespace KartoScanMatcher
     
     // delete pose response array
     delete [] pPoseResponse;
-
+    
     rMean = averagePose;
     
     if (bestResponse > 1.0)
@@ -401,7 +385,6 @@ namespace KartoScanMatcher
     // put in all valid points
     const_forEach(PointVectorDouble, &validPoints)
     {
-      // 以m_offset为原点，即只考虑落在ROI内部的点
       Vector2<kt_int32s> gridPoint = m_pCorrelationGrid->WorldToGrid(*iter);  
       if (!math::IsUpTo(gridPoint.GetX(), m_pCorrelationGrid->GetROI().GetWidth()) ||
         !math::IsUpTo(gridPoint.GetY(), m_pCorrelationGrid->GetROI().GetHeight()))
@@ -410,7 +393,6 @@ namespace KartoScanMatcher
         continue;
       }
       
-      // 以整个correlationGrid的原点为参考点
       int gridIndex = m_pCorrelationGrid->GridIndex(gridPoint);
       
       // set grid cell as occupied
@@ -538,31 +520,32 @@ namespace KartoScanMatcher
     
     return response;
   }
-
-  /****************************************/
+  
+  ////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////
   
   /**
    * Default constructor
    */
   Mapper::Mapper()
-    : m_Initialized(false)
-    , m_pSequentialScanMatcher(NULL)
-    , m_pMapperSensorManager(NULL)
+  : m_Initialized(false)
+  , m_pSequentialScanMatcher(NULL)
+  , m_pMapperSensorManager(NULL)
   {
     InitializeParameters();
   }
-
+  
   /**
    * Destructor
    */
   Mapper::~Mapper()
   {
     Reset();
-
+    
     delete m_pMapperSensorManager;
   }
-
-  // 设置基本参数
+  
   void Mapper::InitializeParameters()
   {
     m_pUseScanMatching = true;
@@ -571,14 +554,14 @@ namespace KartoScanMatcher
     m_pMinimumTravelHeading = math::DegreesToRadians(10);
     m_pScanBufferSize = 70;
     m_pScanBufferMaximumScanDistance = 20.0;
-
+    
     //////////////////////////////////////////////////////////////////////////////
     //    CorrelationParameters correlationParameters;
     m_pCorrelationSearchSpaceDimension = 0.3;
     m_pCorrelationSearchSpaceResolution = 0.01;
     m_pCorrelationSearchSpaceSmearDeviation = 0.03;
-
-
+    
+    
     //////////////////////////////////////////////////////////////////////////////
     // ScanMatcherParameters;
     m_pFineSearchAngleOffset = math::DegreesToRadians(0.2);
@@ -589,77 +572,77 @@ namespace KartoScanMatcher
     m_AngleVariancePenalty = math::Square(math::DegreesToRadians(20));
     m_MinimumAnglePenalty = 0.9;
     m_MinimumDistancePenalty = 0.5;
-
+    
   }
   /* Adding in getters and setters here for easy parameter access */
-
+  
   // General Parameters
-
+  
   bool Mapper::getParamUseScanMatching()
   {
     return static_cast<bool>(m_pUseScanMatching);
   }
-
+  
   bool Mapper::getParamUseScanBarycenter()
   {
     return static_cast<bool>(m_pUseScanBarycenter);
   }
-
+  
   double Mapper::getParamMinimumTravelDistance()
   {
     return static_cast<double>(m_pMinimumTravelDistance);
   }
-
+  
   double Mapper::getParamMinimumTravelHeading()
   {
     return math::RadiansToDegrees(static_cast<double>(m_pMinimumTravelHeading));
   }
-
+  
   int Mapper::getParamScanBufferSize()
   {
     return static_cast<int>(m_pScanBufferSize);
   }
-
+  
   double Mapper::getParamScanBufferMaximumScanDistance()
   {
     return static_cast<double>(m_pScanBufferMaximumScanDistance);
   }
-
-
+  
+  
   // Correlation Parameters - Correlation Parameters
-
+  
   double Mapper::getParamCorrelationSearchSpaceDimension()
   {
     return static_cast<double>(m_pCorrelationSearchSpaceDimension);
   }
-
+  
   double Mapper::getParamCorrelationSearchSpaceResolution()
   {
     return static_cast<double>(m_pCorrelationSearchSpaceResolution);
   }
-
+  
   double Mapper::getParamCorrelationSearchSpaceSmearDeviation()
   {
     return static_cast<double>(m_pCorrelationSearchSpaceSmearDeviation);
   }
-
+  
   // ScanMatcher Parameters
-
+  
   double Mapper::getParamFineSearchAngleOffset()
   {
     return static_cast<double>(m_pFineSearchAngleOffset);
   }
-
+  
   double Mapper::getParamCoarseSearchAngleOffset()
   {
     return static_cast<double>(m_pCoarseSearchAngleOffset);
   }
-
+  
   double Mapper::getParamCoarseAngleResolution()
   {
     return static_cast<double>(m_pCoarseAngleResolution);
   }
-
+  
   double Mapper::getParamDistanceVariancePenalty()
   {
     return static_cast<double>(m_DistanceVariancePenalty);
@@ -679,74 +662,74 @@ namespace KartoScanMatcher
   {
     return static_cast<double>(m_MinimumDistancePenalty);
   }
-
+  
   /* Setters for parameters */
   // General Parameters
   void Mapper::setParamUseScanMatching(bool b)
   {
     m_pUseScanMatching = (kt_bool)b;
   }
-
+  
   void Mapper::setParamUseScanBarycenter(bool b)
   {
     m_pUseScanBarycenter = (kt_bool)b;
   }
-
+  
   void Mapper::setParamMinimumTravelDistance(double d)
   {
     m_pMinimumTravelDistance = (kt_double)d;
   }
-
+  
   void Mapper::setParamMinimumTravelHeading(double d)
   {
     m_pMinimumTravelHeading = (kt_double)d;
   }
-
+  
   void Mapper::setParamScanBufferSize(int i)
   {
     m_pScanBufferSize = (kt_int32u)i;
   }
-
+  
   void Mapper::setParamScanBufferMaximumScanDistance(double d)
   {
     m_pScanBufferMaximumScanDistance = (kt_double)d;
   }
-
+  
   
   // Correlation Parameters - Correlation Parameters
   void Mapper::setParamCorrelationSearchSpaceDimension(double d)
   {
     m_pCorrelationSearchSpaceDimension = (kt_double)d;
   }
-
+  
   void Mapper::setParamCorrelationSearchSpaceResolution(double d)
   {
     m_pCorrelationSearchSpaceResolution = (kt_double)d;
   }
-
+  
   void Mapper::setParamCorrelationSearchSpaceSmearDeviation(double d)
   {
     m_pCorrelationSearchSpaceSmearDeviation = (kt_double)d;
   }
-
-
+  
+  
   // Scan Matcher Parameters
-
+  
   void Mapper::setParamFineSearchAngleOffset(double d)
   {
     m_pFineSearchAngleOffset = (kt_double)d;
   }
-
+  
   void Mapper::setParamCoarseSearchAngleOffset(double d)
   {
     m_pCoarseSearchAngleOffset = (kt_double)d;
   }
-
+  
   void Mapper::setParamCoarseAngleResolution(double d)
   {
     m_pCoarseAngleResolution = (kt_double)d;
   }
-
+  
   void Mapper::setParamDistanceVariancePenalty(double d)
   {
     m_DistanceVariancePenalty = (kt_double)d;
@@ -766,16 +749,11 @@ namespace KartoScanMatcher
   {
     m_MinimumDistancePenalty = (kt_double)d;
   }
-
+  
   void Mapper::Initialize(kt_double rangeThreshold)
   {
     if (m_Initialized == false)
     {
-      // create sequential scan and loop matcher
-      // m_pCorrelationSearchSpaceDimension = 0.3
-      // m_pCorrelationSearchSpaceResolution = 0.01
-      // m_pCorrelationSearchSpaceSmearDeviation = 0.03
-      // rangeThreshold = 12.0
       m_pSequentialScanMatcher = ScanMatcher::Create(this,
                                                      m_pCorrelationSearchSpaceDimension,
                                                      m_pCorrelationSearchSpaceResolution,
@@ -783,15 +761,13 @@ namespace KartoScanMatcher
                                                      rangeThreshold);
       assert(m_pSequentialScanMatcher);
       
-      // m_pScanBufferSize = 70
-      // m_pScanBufferMaximumScanDistance = 20.0
       m_pMapperSensorManager = new MapperSensorManager(m_pScanBufferSize,
                                                        m_pScanBufferMaximumScanDistance);
       
       m_Initialized = true;
     }
   }
-
+  
   void Mapper::Reset()
   {
     delete m_pSequentialScanMatcher;
@@ -799,7 +775,7 @@ namespace KartoScanMatcher
     
     m_Initialized = false;
   }
-
+  
   kt_bool Mapper::Process(LocalizedRangeScan* pScan)
   {
     if (pScan != NULL)
@@ -819,14 +795,12 @@ namespace KartoScanMatcher
       }
       
       // get last scan
-      // 如果这一帧是第一帧，则pLastScan返回NULL
       LocalizedRangeScan* pLastScan = m_pMapperSensorManager->GetLastScan(pScan->GetSensorName());
       
       // update scans corrected pose based on last correction
       if (pLastScan != NULL)
       {
         Transform lastTransform(pLastScan->GetOdometricPose(), pLastScan->GetCorrectedPose());
-        // 根据码盘数据定位
         pScan->SetCorrectedPose(lastTransform.TransformPose(pScan->GetOdometricPose()));
       }
       
@@ -842,12 +816,10 @@ namespace KartoScanMatcher
       // scan matching
       if (m_pUseScanMatching && pLastScan != NULL)
       {
-        
         Pose2 bestPose;
-        // 核心一：扫描匹配
         m_pSequentialScanMatcher->MatchScan(pScan, m_pMapperSensorManager->GetRunningScans(pScan->GetSensorName()), 
                                             bestPose, covariance);
-        pScan->SetSensorPose(bestPose);  // 位姿更新
+        pScan->SetSensorPose(bestPose);
         
       }
       
@@ -866,7 +838,7 @@ namespace KartoScanMatcher
     
     return false;
   }
-
+  
   /**
    * Is the scan sufficiently far from the last scan?
    * @param pScan
@@ -881,7 +853,6 @@ namespace KartoScanMatcher
       return true;
     }
     
-    // 激光传感器中心在里程计坐标系下的位姿
     Pose2 lastScannerPose = pLastScan->GetSensorAt(pLastScan->GetOdometricPose());
     Pose2 scannerPose = pScan->GetSensorAt(pScan->GetOdometricPose());
     
@@ -901,7 +872,7 @@ namespace KartoScanMatcher
     
     return false;
   }
-
+  
   /**
    * Gets all the processed scans
    * @return all scans
@@ -909,18 +880,18 @@ namespace KartoScanMatcher
   const LocalizedRangeScanVector Mapper::GetAllProcessedScans() const
   {
     LocalizedRangeScanVector allScans;
-
+    
     if (m_pMapperSensorManager != NULL)
     {
       allScans = m_pMapperSensorManager->GetAllScans();
     }
-
+    
     return allScans;
   }
-
+  
   ScanMatcher* Mapper::GetSequentialScanMatcher() const
   {
     return m_pSequentialScanMatcher;
   }
-
+  
 }  // namespace KartoScanMatcher

@@ -1,5 +1,5 @@
-#ifndef _LASER_SENSOR_H_
-#define _LASER_SENSOR_H_
+#ifndef KARTO_SCAN_MATCHER_LASER_SENSOR_H_
+#define KARTO_SCAN_MATCHER_LASER_SENSOR_H_
 
 #include <karto_scan_matcher/DataStructure.h>
 #include <karto_scan_matcher/Macros.h>
@@ -15,7 +15,6 @@ namespace KartoScanMatcher
  * Type declaration of range readings vector
  */
 typedef std::vector<kt_double> RangeReadingsVector;
-
 
 /**
  * LaserRangeScan representing the range readings from a laser range finder sensor.
@@ -137,6 +136,9 @@ private:
   std::string m_SensorName;
 };  // LaserRangeScan
 
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * The LaserRangeFinder defines a laser sensor that provides the pose offset position of a localized range scan relative to the robot.
@@ -552,6 +554,9 @@ private:
   std::string m_Name;
 };  // LaserRangeFinder
 
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * The LocalizedRangeScan contains range data from a single sweep of a laser range finder sensor
@@ -876,4 +881,4 @@ typedef std::vector<LocalizedRangeScan*> LocalizedRangeScanVector;
 
 }  // namespace KartoScanMatcher
 
-#endif  // _LASER_SENSOR_H_
+#endif  // KARTO_SCAN_MATCHER_LASER_SENSOR_H_

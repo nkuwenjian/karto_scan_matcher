@@ -1,5 +1,5 @@
-#ifndef _MAPPER_SENSOR_MANAGER_H_
-#define _MAPPER_SENSOR_MANAGER_H_
+#ifndef KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H_
+#define KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H_
 
 #include <karto_scan_matcher/DataStructure.h>
 #include <karto_scan_matcher/Math.h>
@@ -123,7 +123,11 @@ private:
   kt_int32u m_RunningBufferMaximumSize;
   kt_double m_RunningBufferMaximumDistance;
 };  // ScanManager  
-  
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * Manages the devices for the mapper
  */
@@ -158,7 +162,7 @@ public:
    */
   void RegisterSensor(const std::string& rSensorName)
   {
-    if (GetScanManager(rSensorName) == NULL)  // 说明m_ScanManagers中没有对应的数据
+    if (GetScanManager(rSensorName) == NULL)
     {
       m_ScanManagers[rSensorName] = new ScanManager(m_RunningBufferMaximumSize, m_RunningBufferMaximumDistance);
     }
@@ -340,4 +344,4 @@ private:
 
 }  // namespace KartoScanMatcher
 
-#endif  // _MAPPER_SENSOR_MANAGER_H_
+#endif  // KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H_

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+  <param name="/use_sim_time" value="true"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser"
+    args="0.15 0.0 0.0 0.0 0.0 0.0 /base_link /laser 40" />
+
+  <node pkg="karto_scan_matcher" type="karto_scan_matcher_node"
+    name="karto_scan_matcher_node" output="screen">
+  </node>
+  
+  <node pkg="rviz" type="rviz" name="rviz" 
+    args="-d $(find karto_scan_matcher)/launch/demo.rviz"/>
+
+</launch>

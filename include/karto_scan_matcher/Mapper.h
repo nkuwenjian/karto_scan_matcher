@@ -15,18 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KARTO_SCAN_MATCHER_MAPPER_H_
-#define KARTO_SCAN_MATCHER_MAPPER_H_
+#ifndef KARTO_SCAN_MATCHER_MAPPER_H
+#define KARTO_SCAN_MATCHER_MAPPER_H
 
 #include <map>
 #include <vector>
 
-#include <karto_scan_matcher/DataStructure.h>
-#include <karto_scan_matcher/CorrelationGrid.h>
-#include <karto_scan_matcher/Grid.h>
-#include <karto_scan_matcher/LaserSensor.h>
-#include <karto_scan_matcher/GridIndexLookup.h>
-#include <karto_scan_matcher/MapperSensorManager.h>
+#include "karto_scan_matcher/DataStructure.h"
+#include "karto_scan_matcher/CorrelationGrid.h"
+#include "karto_scan_matcher/Grid.h"
+#include "karto_scan_matcher/LaserSensor.h"
+#include "karto_scan_matcher/GridIndexLookup.h"
+#include "karto_scan_matcher/MapperSensorManager.h"
 
 namespace KartoScanMatcher
 {
@@ -342,4 +342,4 @@ public:
 
 }  // namespace KartoScanMatcher
 
-#endif  // KARTO_SCAN_MATCHER_MAPPER_H_
+#endif  // KARTO_SCAN_MATCHER_MAPPER_H

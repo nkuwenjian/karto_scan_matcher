@@ -1,9 +1,9 @@
-#ifndef KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H_
-#define KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H_
+#ifndef KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H
+#define KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H
 
-#include <karto_scan_matcher/DataStructure.h>
-#include <karto_scan_matcher/Math.h>
-#include <karto_scan_matcher/LaserSensor.h>
+#include "karto_scan_matcher/DataStructure.h"
+#include "karto_scan_matcher/Math.h"
+#include "karto_scan_matcher/LaserSensor.h"
 
 namespace KartoScanMatcher
 {
@@ -344,4 +344,4 @@ private:
 
 }  // namespace KartoScanMatcher
 
-#endif  // KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H_
+#endif  // KARTO_SCAN_MATCHER_MAPPER_SENSOR_MANAGER_H

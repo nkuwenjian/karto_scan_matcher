@@ -1,7 +1,7 @@
-#ifndef KARTO_SCAN_MATCHER_COORDINATE_CONVERTER_H_
-#define KARTO_SCAN_MATCHER_COORDINATE_CONVERTER_H_
+#ifndef KARTO_SCAN_MATCHER_COORDINATE_CONVERTER_H
+#define KARTO_SCAN_MATCHER_COORDINATE_CONVERTER_H
 
-#include <karto_scan_matcher/DataStructure.h>
+#include "karto_scan_matcher/DataStructure.h"
 
 namespace KartoScanMatcher
 {
@@ -177,4 +177,4 @@ private:
 
 }  // namespace KartoScanMatcher
 
-#endif  // KARTO_SCAN_MATCHER_COORDINATE_CONVERTER_H_
+#endif  // KARTO_SCAN_MATCHER_COORDINATE_CONVERTER_H

@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KARTO_SCAN_MATCHER_TYPES_H_
-#define KARTO_SCAN_MATCHER_TYPES_H_
+#ifndef KARTO_SCAN_MATCHER_TYPES_H
+#define KARTO_SCAN_MATCHER_TYPES_H
 
 #include <cstddef>
 
@@ -93,4 +93,4 @@ namespace KartoScanMatcher
   
 }  // namespace KartoScanMatcher
 
-#endif // KARTO_SCAN_MATCHER_TYPES_H_
+#endif // KARTO_SCAN_MATCHER_TYPES_H

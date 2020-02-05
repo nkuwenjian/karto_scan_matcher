@@ -1,8 +1,8 @@
-#ifndef KARTO_SCAN_MATCHER_GRID_H_
-#define KARTO_SCAN_MATCHER_GRID_H_
+#ifndef KARTO_SCAN_MATCHER_GRID_H
+#define KARTO_SCAN_MATCHER_GRID_H
 
-#include <karto_scan_matcher/DataStructure.h>
-#include <karto_scan_matcher/CoordinateConverter.h>
+#include "karto_scan_matcher/DataStructure.h"
+#include "karto_scan_matcher/CoordinateConverter.h"
 
 #include <cstdlib>
 #include <sstream>
@@ -398,4 +398,4 @@ private:
   
 }  //  namespace KartoScanMatcher
 
-#endif  // KARTO_SCAN_MATCHER_GRID_H_
+#endif  // KARTO_SCAN_MATCHER_GRID_H

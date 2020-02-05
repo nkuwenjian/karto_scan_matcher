@@ -1,8 +1,8 @@
-#ifndef KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H_
-#define KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H_
+#ifndef KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H
+#define KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H
 
-#include <karto_scan_matcher/DataStructure.h>
-#include <karto_scan_matcher/Grid.h>
+#include "karto_scan_matcher/DataStructure.h"
+#include "karto_scan_matcher/Grid.h"
 
 #include <string.h>
 
@@ -268,7 +268,7 @@ protected:
       kt_double rangeReading = pScan->GetRangeReadings()[pointIndex];
       kt_bool isEndPointValid = rangeReading < (rangeThreshold - KT_TOLERANCE);
 
-      if (rangeReading <= minRange || rangeReading >= maxRange || isnan(rangeReading))
+      if (rangeReading <= minRange || rangeReading >= maxRange || std::isnan(rangeReading))
       {
         // ignore these readings
         pointIndex++;
@@ -432,4 +432,4 @@ private:
   
 }  // namespace KartoScanMatcher
 
-#endif  // KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H_
+#endif  // KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H

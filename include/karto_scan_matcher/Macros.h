@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KARTO_SCAN_MATCHER_MACROS_H_
-#define KARTO_SCAN_MATCHER_MACROS_H_
+#ifndef KARTO_SCAN_MATCHER_MACROS_H
+#define KARTO_SCAN_MATCHER_MACROS_H
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -124,4 +124,4 @@
 
 #endif  // __INTEL_COMPILER
 
-#endif  // KARTO_SCAN_MATCHER_MACROS_H_
+#endif  // KARTO_SCAN_MATCHER_MACROS_H

@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KARTO_SCAN_MATCHER_MATH_H_
-#define KARTO_SCAN_MATCHER_MATH_H_
+#ifndef KARTO_SCAN_MATCHER_MATH_H
+#define KARTO_SCAN_MATCHER_MATH_H
 
 #include <assert.h>
 #include <math.h>
 #include <limits>
 
-#include <karto_scan_matcher/Types.h>
+#include "karto_scan_matcher/Types.h"
 
 namespace KartoScanMatcher
 {
@@ -249,4 +249,4 @@ namespace KartoScanMatcher
 
 }  // namespace KartoScanMatcher
 
-#endif  // KARTO_SCAN_MATCHER_MATH_H_
+#endif  // KARTO_SCAN_MATCHER_MATH_H

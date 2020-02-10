@@ -43,10 +43,9 @@ public:
     , m_pCellPassCnt(Grid<kt_int32u>::CreateGrid(0, 0, resolution))
     , m_pCellHitsCnt(Grid<kt_int32u>::CreateGrid(0, 0, resolution))
   {
-
     if (math::DoubleEqual(resolution, 0.0))
     {
-      throw ("Resolution cannot be 0");
+      throw("Resolution cannot be 0");
     }
 
     m_pMinPassThrough = 2;
@@ -93,10 +92,8 @@ public:
    */
   OccupancyGrid* Clone() const
   {
-    OccupancyGrid* pOccupancyGrid = new OccupancyGrid(GetWidth(),
-                            GetHeight(),
-                            GetCoordinateConverter()->GetOffset(),
-                            1.0 / GetCoordinateConverter()->GetScale());
+    OccupancyGrid* pOccupancyGrid = new OccupancyGrid(GetWidth(), GetHeight(), GetCoordinateConverter()->GetOffset(),
+                                                      1.0 / GetCoordinateConverter()->GetScale());
     memcpy(pOccupancyGrid->GetDataPointer(), GetDataPointer(), GetDataSize());
 
     pOccupancyGrid->GetCoordinateConverter()->SetSize(GetCoordinateConverter()->GetSize());
@@ -166,7 +163,7 @@ public:
       }
     }
 
-    return (distance < maxRange)? distance : maxRange;
+    return (distance < maxRange) ? distance : maxRange;
   }
 
   /**
@@ -216,11 +213,8 @@ protected:
    * @param rHeight
    * @param rOffset
    */
-  static void ComputeDimensions(const LocalizedRangeScanVector& rScans,
-                  kt_double resolution,
-                  kt_int32s& rWidth,
-                  kt_int32s& rHeight,
-                  Vector2<kt_double>& rOffset)
+  static void ComputeDimensions(const LocalizedRangeScanVector& rScans, kt_double resolution, kt_int32s& rWidth,
+                                kt_int32s& rHeight, Vector2<kt_double>& rOffset)
   {
     BoundingBox2 boundingBox;
     const_forEach(LocalizedRangeScanVector, &rScans)
@@ -322,17 +316,15 @@ protected:
    * @param doUpdate whether to update the cells' occupancy status immediately
    * @return returns false if an endpoint fell off the grid, otherwise true
    */
-  virtual kt_bool RayTrace(const Vector2<kt_double>& rWorldFrom,
-                const Vector2<kt_double>& rWorldTo,
-                kt_bool isEndPointValid,
-                kt_bool doUpdate = false)
+  virtual kt_bool RayTrace(const Vector2<kt_double>& rWorldFrom, const Vector2<kt_double>& rWorldTo,
+                           kt_bool isEndPointValid, kt_bool doUpdate = false)
   {
     assert(m_pCellPassCnt != NULL && m_pCellHitsCnt != NULL);
 
     Vector2<kt_int32s> gridFrom = m_pCellPassCnt->WorldToGrid(rWorldFrom);
     Vector2<kt_int32s> gridTo = m_pCellPassCnt->WorldToGrid(rWorldTo);
 
-    //CellUpdater* pCellUpdater = doUpdate ? m_pCellUpdater : NULL;
+    // CellUpdater* pCellUpdater = doUpdate ? m_pCellUpdater : NULL;
     m_pCellPassCnt->TraceLine(gridFrom.GetX(), gridFrom.GetY(), gridTo.GetX(), gridTo.GetY());
 
     // for the end point
@@ -434,7 +426,6 @@ private:
   const OccupancyGrid& operator=(const OccupancyGrid&);
 
 private:
-
   ////////////////////////////////////////////////////////////
   // NOTE: These two values are dependent on the resolution.  If the resolution is too small,
   // then not many beams will hit the cell!
@@ -446,7 +437,7 @@ private:
   // Minimum ratio of beams hitting cell to beams passing through cell for cell to be marked as occupied
   kt_double m_pOccupancyThreshold;
 };  // OccupancyGrid
-  
+
 }  // namespace KartoScanMatcher
 
 #endif  // KARTO_SCAN_MATCHER_OCCUPANCY_GRID_H

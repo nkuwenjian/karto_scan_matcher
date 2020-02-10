@@ -36,7 +36,7 @@ public:
    */
   virtual ~CorrelationGrid()
   {
-    delete [] m_pKernel;
+    delete[] m_pKernel;
   }
 
 public:
@@ -48,10 +48,7 @@ public:
    * @param smearDeviation
    * @return correlation grid
    */
-  static CorrelationGrid* CreateGrid(kt_int32s width,
-                    kt_int32s height,
-                    kt_double resolution,
-                    kt_double smearDeviation)
+  static CorrelationGrid* CreateGrid(kt_int32s width, kt_int32s height, kt_double resolution, kt_double smearDeviation)
   {
     assert(resolution != 0.0);
 
@@ -144,11 +141,9 @@ protected:
    * @param resolution
    * @param smearDeviation
    */
-  CorrelationGrid(kt_int32u width, kt_int32u height, kt_int32u borderSize,
-          kt_double resolution, kt_double smearDeviation)
-    : Grid<kt_int8u>(width + borderSize * 2, height + borderSize * 2)
-    , m_SmearDeviation(smearDeviation)
-    , m_pKernel(NULL)
+  CorrelationGrid(kt_int32u width, kt_int32u height, kt_int32u borderSize, kt_double resolution,
+                  kt_double smearDeviation)
+    : Grid<kt_int8u>(width + borderSize * 2, height + borderSize * 2), m_SmearDeviation(smearDeviation), m_pKernel(NULL)
   {
     GetCoordinateConverter()->SetScale(1.0 / resolution);
 
@@ -178,10 +173,8 @@ protected:
     if (!math::InRange(m_SmearDeviation, MIN_SMEAR_DISTANCE_DEVIATION, MAX_SMEAR_DISTANCE_DEVIATION))
     {
       std::stringstream error;
-      error << "Mapper Error:  Smear deviation too small:  Must be between "
-          << MIN_SMEAR_DISTANCE_DEVIATION
-          << " and "
-          << MAX_SMEAR_DISTANCE_DEVIATION;
+      error << "Mapper Error:  Smear deviation too small:  Must be between " << MIN_SMEAR_DISTANCE_DEVIATION << " and "
+            << MAX_SMEAR_DISTANCE_DEVIATION;
       throw std::runtime_error(error.str());
     }
 

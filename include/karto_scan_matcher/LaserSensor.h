@@ -44,9 +44,7 @@ public:
    * @param rSensorName
    */
   LaserRangeScan(const std::string& rSensorName)
-  : m_SensorName(rSensorName)
-  , m_pRangeReadings(NULL)
-  , m_NumberOfRangeReadings(0)
+    : m_SensorName(rSensorName), m_pRangeReadings(NULL), m_NumberOfRangeReadings(0)
   {
   }
 
@@ -56,9 +54,7 @@ public:
    * @param rRangeReadings
    */
   LaserRangeScan(const std::string& rSensorName, const RangeReadingsVector& rRangeReadings)
-  : m_SensorName(rSensorName)
-  , m_pRangeReadings(NULL)
-  , m_NumberOfRangeReadings(0)
+    : m_SensorName(rSensorName), m_pRangeReadings(NULL), m_NumberOfRangeReadings(0)
   {
     assert(rSensorName != "");
 
@@ -70,7 +66,7 @@ public:
    */
   virtual ~LaserRangeScan()
   {
-    delete [] m_pRangeReadings;
+    delete[] m_pRangeReadings;
   }
 
 public:
@@ -108,7 +104,7 @@ public:
       if (rRangeReadings.size() != m_NumberOfRangeReadings)
       {
         // delete old readings
-        delete [] m_pRangeReadings;
+        delete[] m_pRangeReadings;
 
         // store size of array!
         m_NumberOfRangeReadings = static_cast<kt_int32u>(rRangeReadings.size());
@@ -126,7 +122,7 @@ public:
     }
     else
     {
-      delete [] m_pRangeReadings;
+      delete[] m_pRangeReadings;
       m_pRangeReadings = NULL;
     }
   }
@@ -158,7 +154,8 @@ private:
 ////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * The LaserRangeFinder defines a laser sensor that provides the pose offset position of a localized range scan relative to the robot.
+ * The LaserRangeFinder defines a laser sensor that provides the pose offset position of a localized range scan relative
+ * to the robot.
  * The user can set an offset pose for the sensor relative to the robot coordinate system. If no value is provided
  * by the user, the sensor is set to be at the origin of the robot coordinate system.
  * The LaserRangeFinder contains parameters for physical laser sensor used by the mapper for scan matching
@@ -346,8 +343,8 @@ public:
 
     if (math::InRange(GetRangeThreshold(), GetMinimumRange(), GetMaximumRange()) == false)
     {
-      std::cout << "Please set range threshold to a value between ["
-          << GetMinimumRange() << ";" << GetMaximumRange() << "]" << std::endl;
+      std::cout << "Please set range threshold to a value between [" << GetMinimumRange() << ";" << GetMaximumRange()
+                << "]" << std::endl;
       return false;
     }
 
@@ -360,12 +357,11 @@ public:
     if (pLaserRangeScan->GetNumberOfRangeReadings() != GetNumberOfRangeReadings())
     {
       std::cout << "LaserRangeScan contains " << pLaserRangeScan->GetNumberOfRangeReadings()
-        << " range readings, expected " << GetNumberOfRangeReadings() << std::endl;
+                << " range readings, expected " << GetNumberOfRangeReadings() << std::endl;
       return false;
     }
     return true;
   }
-
 
 public:
   /**
@@ -519,9 +515,7 @@ private:
   /**
    * Constructs a LaserRangeFinder object with given ID
    */
-  LaserRangeFinder(const std::string& rName)
-  : m_Name(rName)
-  , m_NumberOfRangeReadings(0)
+  LaserRangeFinder(const std::string& rName) : m_Name(rName), m_NumberOfRangeReadings(0)
   {
     m_pMinimumRange = 0.0;
     m_pMaximumRange = 80.0;
@@ -540,9 +534,8 @@ private:
    */
   void Update()
   {
-    m_NumberOfRangeReadings = static_cast<kt_int32u>(math::Round((GetMaximumAngle() -
-                                  GetMinimumAngle()) / 
-                                  GetAngularResolution()) + 1);
+    m_NumberOfRangeReadings =
+        static_cast<kt_int32u>(math::Round((GetMaximumAngle() - GetMinimumAngle()) / GetAngularResolution()) + 1);
   }
 
 private:
@@ -588,9 +581,7 @@ public:
    * Constructs a range scan from the given range finder with the given readings
    */
   LocalizedRangeScan(LaserRangeFinder* rLaserRangeFinder, const RangeReadingsVector& rReadings)
-  : LaserRangeScan(rLaserRangeFinder->GetName(), rReadings)
-  , m_LaserRangeFinder(rLaserRangeFinder)
-  , m_IsDirty(true)
+    : LaserRangeScan(rLaserRangeFinder->GetName(), rReadings), m_LaserRangeFinder(rLaserRangeFinder), m_IsDirty(true)
   {
   }
 
@@ -704,8 +695,7 @@ public:
     kt_double angleoffset = atan2(deviceOffsetPose2.GetY(), deviceOffsetPose2.GetX());
     kt_double correctedHeading = math::NormalizeAngle(rScanPose.GetHeading());
     Pose2 worldSensorOffset = Pose2(offsetLength * cos(correctedHeading + angleoffset - offsetHeading),
-                    offsetLength * sin(correctedHeading + angleoffset - offsetHeading),
-                    offsetHeading);
+                                    offsetLength * sin(correctedHeading + angleoffset - offsetHeading), offsetHeading);
 
     m_CorrectedPose = rScanPose - worldSensorOffset;
 

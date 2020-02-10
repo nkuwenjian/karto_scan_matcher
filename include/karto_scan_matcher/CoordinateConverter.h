@@ -33,8 +33,7 @@ public:
   /**
    * Default constructor
    */
-  CoordinateConverter()
-  : m_Scale(20.0)
+  CoordinateConverter() : m_Scale(20.0)
   {
   }
 

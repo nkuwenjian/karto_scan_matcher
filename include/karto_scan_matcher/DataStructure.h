@@ -29,16 +29,14 @@ namespace KartoScanMatcher
 /**
  * Represents a size (width, height) in 2-dimensional real space.
  */
-template<typename T>
+template <typename T>
 class Size2
 {
 public:
   /**
    * Default constructor
    */
-  Size2()
-  : m_Width(0)
-  , m_Height(0)
+  Size2() : m_Width(0), m_Height(0)
   {
   }
 
@@ -47,9 +45,7 @@ public:
    * @param width
    * @param height
    */
-  Size2(T width, T height)
-  : m_Width(width)
-  , m_Height(height)
+  Size2(T width, T height) : m_Width(width), m_Height(height)
   {
   }
 
@@ -57,9 +53,7 @@ public:
    * Copy constructor
    * @param rOther
    */
-  Size2(const Size2& rOther)
-  : m_Width(rOther.m_Width)
-  , m_Height(rOther.m_Height)
+  Size2(const Size2& rOther) : m_Width(rOther.m_Width), m_Height(rOther.m_Height)
   {
   }
 
@@ -103,18 +97,18 @@ public:
   /**
    * Assignment operator
    */
-  inline Size2& operator = (const Size2& rOther)
+  inline Size2& operator=(const Size2& rOther)
   {
     m_Width = rOther.m_Width;
     m_Height = rOther.m_Height;
 
-    return(*this);
+    return (*this);
   }
 
   /**
    * Equality operator
    */
-  inline kt_bool operator == (const Size2& rOther) const
+  inline kt_bool operator==(const Size2& rOther) const
   {
     return (m_Width == rOther.m_Width && m_Height == rOther.m_Height);
   }
@@ -122,7 +116,7 @@ public:
   /**
    * Inequality operator
    */
-  inline kt_bool operator != (const Size2& rOther) const
+  inline kt_bool operator!=(const Size2& rOther) const
   {
     return (m_Width != rOther.m_Width || m_Height != rOther.m_Height);
   }
@@ -139,7 +133,7 @@ private:
 /**
  * Represents a vector (x, y) in 2-dimensional real space.
  */
-template<typename T>
+template <typename T>
 class Vector2
 {
 public:
@@ -206,8 +200,10 @@ public:
    */
   inline void MakeFloor(const Vector2& rOther)
   {
-    if ( rOther.m_Values[0] < m_Values[0] ) m_Values[0] = rOther.m_Values[0];
-    if ( rOther.m_Values[1] < m_Values[1] ) m_Values[1] = rOther.m_Values[1];
+    if (rOther.m_Values[0] < m_Values[0])
+      m_Values[0] = rOther.m_Values[0];
+    if (rOther.m_Values[1] < m_Values[1])
+      m_Values[1] = rOther.m_Values[1];
   }
 
   /**
@@ -216,8 +212,10 @@ public:
    */
   inline void MakeCeil(const Vector2& rOther)
   {
-    if ( rOther.m_Values[0] > m_Values[0] ) m_Values[0] = rOther.m_Values[0];
-    if ( rOther.m_Values[1] > m_Values[1] ) m_Values[1] = rOther.m_Values[1];
+    if (rOther.m_Values[0] > m_Values[0])
+      m_Values[0] = rOther.m_Values[0];
+    if (rOther.m_Values[1] > m_Values[1])
+      m_Values[1] = rOther.m_Values[1];
   }
 
   /**
@@ -261,7 +259,7 @@ public:
   /**
    * In place Vector2 addition.
    */
-  inline void operator += (const Vector2& rOther)
+  inline void operator+=(const Vector2& rOther)
   {
     m_Values[0] += rOther.m_Values[0];
     m_Values[1] += rOther.m_Values[1];
@@ -270,7 +268,7 @@ public:
   /**
    * In place Vector2 subtraction.
    */
-  inline void operator -= (const Vector2& rOther)
+  inline void operator-=(const Vector2& rOther)
   {
     m_Values[0] -= rOther.m_Values[0];
     m_Values[1] -= rOther.m_Values[1];
@@ -281,7 +279,7 @@ public:
    * @param rOther
    * @return vector resulting from adding this vector with the given vector
    */
-  inline const Vector2 operator + (const Vector2& rOther) const
+  inline const Vector2 operator+(const Vector2& rOther) const
   {
     return Vector2(m_Values[0] + rOther.m_Values[0], m_Values[1] + rOther.m_Values[1]);
   }
@@ -291,7 +289,7 @@ public:
    * @param rOther
    * @return vector resulting from subtracting this vector from the given vector
    */
-  inline const Vector2 operator - (const Vector2& rOther) const
+  inline const Vector2 operator-(const Vector2& rOther) const
   {
     return Vector2(m_Values[0] - rOther.m_Values[0], m_Values[1] - rOther.m_Values[1]);
   }
@@ -300,7 +298,7 @@ public:
    * In place scalar division operator
    * @param scalar
    */
-  inline void operator /= (T scalar)
+  inline void operator/=(T scalar)
   {
     m_Values[0] /= scalar;
     m_Values[1] /= scalar;
@@ -311,7 +309,7 @@ public:
    * @param scalar
    * @return scalar product
    */
-  inline const Vector2 operator / (T scalar) const
+  inline const Vector2 operator/(T scalar) const
   {
     return Vector2(m_Values[0] / scalar, m_Values[1] / scalar);
   }
@@ -321,7 +319,7 @@ public:
    * @param rOther
    * @return dot product
    */
-  inline kt_double operator * (const Vector2& rOther) const
+  inline kt_double operator*(const Vector2& rOther) const
   {
     return m_Values[0] * rOther.m_Values[0] + m_Values[1] * rOther.m_Values[1];
   }
@@ -330,7 +328,7 @@ public:
    * Scales the vector by the given scalar
    * @param scalar
    */
-  inline const Vector2 operator * (T scalar) const
+  inline const Vector2 operator*(T scalar) const
   {
     return Vector2(m_Values[0] * scalar, m_Values[1] * scalar);
   }
@@ -339,7 +337,7 @@ public:
    * Subtract the vector by the given scalar
    * @param scalar
    */
-  inline const Vector2 operator - (T scalar) const
+  inline const Vector2 operator-(T scalar) const
   {
     return Vector2(m_Values[0] - scalar, m_Values[1] - scalar);
   }
@@ -348,7 +346,7 @@ public:
    * In place scalar multiplication operator
    * @param scalar
    */
-  inline void operator *= (T scalar)
+  inline void operator*=(T scalar)
   {
     m_Values[0] *= scalar;
     m_Values[1] *= scalar;
@@ -358,7 +356,7 @@ public:
    * Equality operator returns true if the corresponding x, y values of each Vector2 are the same values.
    * @param rOther
    */
-  inline kt_bool operator == (const Vector2& rOther) const
+  inline kt_bool operator==(const Vector2& rOther) const
   {
     return (m_Values[0] == rOther.m_Values[0] && m_Values[1] == rOther.m_Values[1]);
   }
@@ -367,7 +365,7 @@ public:
    * Inequality operator returns true if any of the corresponding x, y values of each Vector2 not the same.
    * @param rOther
    */
-  inline kt_bool operator != (const Vector2& rOther) const
+  inline kt_bool operator!=(const Vector2& rOther) const
   {
     return (m_Values[0] != rOther.m_Values[0] || m_Values[1] != rOther.m_Values[1]);
   }
@@ -377,7 +375,7 @@ public:
    * @param rOther
    * @return true if left vector is less than right vector
    */
-  inline kt_bool operator < (const Vector2& rOther) const
+  inline kt_bool operator<(const Vector2& rOther) const
   {
     if (m_Values[0] < rOther.m_Values[0])
       return true;
@@ -394,7 +392,7 @@ private:
 /**
  * Type declaration of Vector2<kt_double> vector
  */
-typedef std::vector< Vector2<kt_double> > PointVectorDouble;
+typedef std::vector<Vector2<kt_double> > PointVectorDouble;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -404,7 +402,7 @@ typedef std::vector< Vector2<kt_double> > PointVectorDouble;
  * Stores x, y, width and height that represents the location and size of a rectangle
  * (x, y) is at bottom left in mapper!
  */
-template<typename T>
+template <typename T>
 class Rectangle2
 {
 public:
@@ -422,9 +420,7 @@ public:
    * @param width width of rectangle
    * @param height height of rectangle
    */
-  Rectangle2(T x, T y, T width, T height)
-  : m_Position(x, y)
-  , m_Size(width, height)
+  Rectangle2(T x, T y, T width, T height) : m_Position(x, y), m_Size(width, height)
   {
   }
 
@@ -433,18 +429,14 @@ public:
    * @param rPosition (x,y)-coordinate of rectangle
    * @param rSize Size of the rectangle
    */
-  Rectangle2(const Vector2<T>& rPosition, const Size2<T>& rSize)
-  : m_Position(rPosition)
-  , m_Size(rSize)
+  Rectangle2(const Vector2<T>& rPosition, const Size2<T>& rSize) : m_Position(rPosition), m_Size(rSize)
   {
   }
 
   /**
    * Copy constructor
    */
-  Rectangle2(const Rectangle2& rOther)
-  : m_Position(rOther.m_Position)
-  , m_Size(rOther.m_Size)
+  Rectangle2(const Rectangle2& rOther) : m_Position(rOther.m_Position), m_Size(rOther.m_Size)
   {
   }
 
@@ -580,7 +572,7 @@ public:
   /**
    * Assignment operator
    */
-  Rectangle2& operator = (const Rectangle2& rOther)
+  Rectangle2& operator=(const Rectangle2& rOther)
   {
     m_Position = rOther.m_Position;
     m_Size = rOther.m_Size;
@@ -591,7 +583,7 @@ public:
   /**
    * Equality operator
    */
-  inline kt_bool operator == (const Rectangle2& rOther) const
+  inline kt_bool operator==(const Rectangle2& rOther) const
   {
     return (m_Position == rOther.m_Position && m_Size == rOther.m_Size);
   }
@@ -599,7 +591,7 @@ public:
   /**
    * Inequality operator
    */
-  inline kt_bool operator != (const Rectangle2& rOther) const
+  inline kt_bool operator!=(const Rectangle2& rOther) const
   {
     return (m_Position != rOther.m_Position || m_Size != rOther.m_Size);
   }
@@ -622,8 +614,7 @@ public:
   /**
    * Default Constructor
    */
-  Pose2()
-  : m_Heading(0.0)
+  Pose2() : m_Heading(0.0)
   {
   }
 
@@ -632,9 +623,7 @@ public:
    * @param rPosition position
    * @param heading heading
    */
-  Pose2(const Vector2<kt_double>& rPosition, kt_double heading)
-  : m_Position(rPosition)
-  , m_Heading(heading)
+  Pose2(const Vector2<kt_double>& rPosition, kt_double heading) : m_Position(rPosition), m_Heading(heading)
   {
   }
 
@@ -644,18 +633,14 @@ public:
    * @param y y-coordinate
    * @param heading heading
    */
-  Pose2(kt_double x, kt_double y, kt_double heading)
-  : m_Position(x, y)
-  , m_Heading(heading)
+  Pose2(kt_double x, kt_double y, kt_double heading) : m_Position(x, y), m_Heading(heading)
   {
   }
 
   /**
    * Copy constructor
    */
-  Pose2(const Pose2& rOther)
-  : m_Position(rOther.m_Position)
-  , m_Heading(rOther.m_Heading)
+  Pose2(const Pose2& rOther) : m_Position(rOther.m_Position), m_Heading(rOther.m_Heading)
   {
   }
 
@@ -745,7 +730,7 @@ public:
   /**
    * Assignment operator
    */
-  inline Pose2& operator = (const Pose2& rOther)
+  inline Pose2& operator=(const Pose2& rOther)
   {
     m_Position = rOther.m_Position;
     m_Heading = rOther.m_Heading;
@@ -756,7 +741,7 @@ public:
   /**
    * Equality operator
    */
-  inline kt_bool operator == (const Pose2& rOther) const
+  inline kt_bool operator==(const Pose2& rOther) const
   {
     return (m_Position == rOther.m_Position && m_Heading == rOther.m_Heading);
   }
@@ -764,7 +749,7 @@ public:
   /**
    * Inequality operator
    */
-  inline kt_bool operator != (const Pose2& rOther) const
+  inline kt_bool operator!=(const Pose2& rOther) const
   {
     return (m_Position != rOther.m_Position || m_Heading != rOther.m_Heading);
   }
@@ -772,7 +757,7 @@ public:
   /**
    * In place Pose2 add.
    */
-  inline void operator += (const Pose2& rOther)
+  inline void operator+=(const Pose2& rOther)
   {
     m_Position += rOther.m_Position;
     m_Heading = math::NormalizeAngle(m_Heading + rOther.m_Heading);
@@ -783,7 +768,7 @@ public:
    * @param rOther
    * @return Pose2 sum
    */
-  inline Pose2 operator + (const Pose2& rOther) const
+  inline Pose2 operator+(const Pose2& rOther) const
   {
     return Pose2(m_Position + rOther.m_Position, math::NormalizeAngle(m_Heading + rOther.m_Heading));
   }
@@ -793,11 +778,10 @@ public:
    * @param rOther
    * @return Pose2 difference
    */
-  inline Pose2 operator - (const Pose2& rOther) const
+  inline Pose2 operator-(const Pose2& rOther) const
   {
     return Pose2(m_Position - rOther.m_Position, math::NormalizeAngle(m_Heading - rOther.m_Heading));
   }
-
 
 private:
   Vector2<kt_double> m_Position;
@@ -808,7 +792,7 @@ private:
 /**
  * Type declaration of Pose2 vector
  */
-typedef std::vector< Pose2 > Pose2Vector;
+typedef std::vector<Pose2> Pose2Vector;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -833,7 +817,7 @@ public:
    */
   inline Matrix3(const Matrix3& rOther)
   {
-    memcpy(m_Matrix, rOther.m_Matrix, 9*sizeof(kt_double));
+    memcpy(m_Matrix, rOther.m_Matrix, 9 * sizeof(kt_double));
   }
 
 public:
@@ -842,7 +826,7 @@ public:
    */
   void SetToIdentity()
   {
-    memset(m_Matrix, 0, 9*sizeof(kt_double));
+    memset(m_Matrix, 0, 9 * sizeof(kt_double));
 
     for (kt_int32s i = 0; i < 3; i++)
     {
@@ -855,7 +839,7 @@ public:
    */
   void Clear()
   {
-    memset(m_Matrix, 0, 9*sizeof(kt_double));
+    memset(m_Matrix, 0, 9 * sizeof(kt_double));
   }
 
   /**
@@ -937,26 +921,25 @@ public:
   {
     // Invert a 3x3 using cofactors.  This is about 8 times faster than
     // the Numerical Recipes code which uses Gaussian elimination.
-    rkInverse.m_Matrix[0][0] = m_Matrix[1][1]*m_Matrix[2][2] - m_Matrix[1][2]*m_Matrix[2][1];
-    rkInverse.m_Matrix[0][1] = m_Matrix[0][2]*m_Matrix[2][1] - m_Matrix[0][1]*m_Matrix[2][2];
-    rkInverse.m_Matrix[0][2] = m_Matrix[0][1]*m_Matrix[1][2] - m_Matrix[0][2]*m_Matrix[1][1];
-    rkInverse.m_Matrix[1][0] = m_Matrix[1][2]*m_Matrix[2][0] - m_Matrix[1][0]*m_Matrix[2][2];
-    rkInverse.m_Matrix[1][1] = m_Matrix[0][0]*m_Matrix[2][2] - m_Matrix[0][2]*m_Matrix[2][0];
-    rkInverse.m_Matrix[1][2] = m_Matrix[0][2]*m_Matrix[1][0] - m_Matrix[0][0]*m_Matrix[1][2];
-    rkInverse.m_Matrix[2][0] = m_Matrix[1][0]*m_Matrix[2][1] - m_Matrix[1][1]*m_Matrix[2][0];
-    rkInverse.m_Matrix[2][1] = m_Matrix[0][1]*m_Matrix[2][0] - m_Matrix[0][0]*m_Matrix[2][1];
-    rkInverse.m_Matrix[2][2] = m_Matrix[0][0]*m_Matrix[1][1] - m_Matrix[0][1]*m_Matrix[1][0];
+    rkInverse.m_Matrix[0][0] = m_Matrix[1][1] * m_Matrix[2][2] - m_Matrix[1][2] * m_Matrix[2][1];
+    rkInverse.m_Matrix[0][1] = m_Matrix[0][2] * m_Matrix[2][1] - m_Matrix[0][1] * m_Matrix[2][2];
+    rkInverse.m_Matrix[0][2] = m_Matrix[0][1] * m_Matrix[1][2] - m_Matrix[0][2] * m_Matrix[1][1];
+    rkInverse.m_Matrix[1][0] = m_Matrix[1][2] * m_Matrix[2][0] - m_Matrix[1][0] * m_Matrix[2][2];
+    rkInverse.m_Matrix[1][1] = m_Matrix[0][0] * m_Matrix[2][2] - m_Matrix[0][2] * m_Matrix[2][0];
+    rkInverse.m_Matrix[1][2] = m_Matrix[0][2] * m_Matrix[1][0] - m_Matrix[0][0] * m_Matrix[1][2];
+    rkInverse.m_Matrix[2][0] = m_Matrix[1][0] * m_Matrix[2][1] - m_Matrix[1][1] * m_Matrix[2][0];
+    rkInverse.m_Matrix[2][1] = m_Matrix[0][1] * m_Matrix[2][0] - m_Matrix[0][0] * m_Matrix[2][1];
+    rkInverse.m_Matrix[2][2] = m_Matrix[0][0] * m_Matrix[1][1] - m_Matrix[0][1] * m_Matrix[1][0];
 
-    kt_double fDet = m_Matrix[0][0]*rkInverse.m_Matrix[0][0] +
-            m_Matrix[0][1]*rkInverse.m_Matrix[1][0] +
-            m_Matrix[0][2]*rkInverse.m_Matrix[2][0];
+    kt_double fDet = m_Matrix[0][0] * rkInverse.m_Matrix[0][0] + m_Matrix[0][1] * rkInverse.m_Matrix[1][0] +
+                     m_Matrix[0][2] * rkInverse.m_Matrix[2][0];
 
     if (fabs(fDet) <= fTolerance)
     {
       return false;
     }
 
-    kt_double fInvDet = 1.0/fDet;
+    kt_double fInvDet = 1.0 / fDet;
     for (size_t row = 0; row < 3; row++)
     {
       for (size_t col = 0; col < 3; col++)
@@ -972,9 +955,9 @@ public:
   /**
    * Assignment operator
    */
-  inline Matrix3& operator = (const Matrix3& rOther)
+  inline Matrix3& operator=(const Matrix3& rOther)
   {
-    memcpy(m_Matrix, rOther.m_Matrix, 9*sizeof(kt_double));
+    memcpy(m_Matrix, rOther.m_Matrix, 9 * sizeof(kt_double));
     return *this;
   }
 
@@ -1005,7 +988,7 @@ public:
    * @param rOther
    * @return Matrix3 product
    */
-  Matrix3 operator * (const Matrix3& rOther) const
+  Matrix3 operator*(const Matrix3& rOther) const
   {
     Matrix3 product;
 
@@ -1013,9 +996,9 @@ public:
     {
       for (size_t col = 0; col < 3; col++)
       {
-        product.m_Matrix[row][col] = m_Matrix[row][0]*rOther.m_Matrix[0][col] +
-                      m_Matrix[row][1]*rOther.m_Matrix[1][col] +
-                      m_Matrix[row][2]*rOther.m_Matrix[2][col];
+        product.m_Matrix[row][col] = m_Matrix[row][0] * rOther.m_Matrix[0][col] +
+                                     m_Matrix[row][1] * rOther.m_Matrix[1][col] +
+                                     m_Matrix[row][2] * rOther.m_Matrix[2][col];
       }
     }
 
@@ -1027,16 +1010,14 @@ public:
    * @param rPose2
    * @return Pose2 product
    */
-  inline Pose2 operator * (const Pose2& rPose2) const
+  inline Pose2 operator*(const Pose2& rPose2) const
   {
     Pose2 pose2;
 
-    pose2.SetX(m_Matrix[0][0] * rPose2.GetX() + m_Matrix[0][1] *
-          rPose2.GetY() + m_Matrix[0][2] * rPose2.GetHeading());
-    pose2.SetY(m_Matrix[1][0] * rPose2.GetX() + m_Matrix[1][1] *
-          rPose2.GetY() + m_Matrix[1][2] * rPose2.GetHeading());
-    pose2.SetHeading(m_Matrix[2][0] * rPose2.GetX() + m_Matrix[2][1] *
-            rPose2.GetY() + m_Matrix[2][2] * rPose2.GetHeading());
+    pose2.SetX(m_Matrix[0][0] * rPose2.GetX() + m_Matrix[0][1] * rPose2.GetY() + m_Matrix[0][2] * rPose2.GetHeading());
+    pose2.SetY(m_Matrix[1][0] * rPose2.GetX() + m_Matrix[1][1] * rPose2.GetY() + m_Matrix[1][2] * rPose2.GetHeading());
+    pose2.SetHeading(m_Matrix[2][0] * rPose2.GetX() + m_Matrix[2][1] * rPose2.GetY() +
+                     m_Matrix[2][2] * rPose2.GetHeading());
 
     return pose2;
   }
@@ -1045,7 +1026,7 @@ public:
    * In place Matrix3 add.
    * @param rkMatrix
    */
-  inline void operator += (const Matrix3& rkMatrix)
+  inline void operator+=(const Matrix3& rkMatrix)
   {
     for (kt_int32u row = 0; row < 3; row++)
     {
@@ -1074,8 +1055,8 @@ public:
    * Default constructor
    */
   BoundingBox2()
-  : m_Minimum(999999999999999999.99999, 999999999999999999.99999)
-  , m_Maximum(-999999999999999999.99999, -999999999999999999.99999)
+    : m_Minimum(999999999999999999.99999, 999999999999999999.99999)
+    , m_Maximum(-999999999999999999.99999, -999999999999999999.99999)
   {
   }
 
@@ -1148,7 +1129,7 @@ public:
   inline kt_bool IsInBounds(const Vector2<kt_double>& rPoint) const
   {
     return (math::InRange(rPoint.GetX(), m_Minimum.GetX(), m_Maximum.GetX()) &&
-        math::InRange(rPoint.GetY(), m_Minimum.GetY(), m_Maximum.GetY()));
+            math::InRange(rPoint.GetY(), m_Minimum.GetY(), m_Maximum.GetY()));
   }
 
 private:
@@ -1254,7 +1235,7 @@ private:
   Matrix3 m_Rotation;
   Matrix3 m_InverseRotation;
 };  // Transform
-  
+
 }  // namespace KartoScanMatcher
 
 #endif  // KARTO_SCAN_MATCHER_DATA_STRUCTURE_H

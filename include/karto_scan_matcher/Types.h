@@ -66,31 +66,25 @@ typedef double kt_double;
 
 namespace KartoScanMatcher
 {
-  /**
-   * Enumerated type for valid LaserRangeFinder types
-   */
-  typedef enum
-  {
-    LaserRangeFinder_Custom = 0,
-    
-    LaserRangeFinder_Sick_LMS100 = 1,
-    LaserRangeFinder_Sick_LMS200 = 2,
-    LaserRangeFinder_Sick_LMS291 = 3,
-    
-    LaserRangeFinder_Hokuyo_UTM_30LX = 4,
-    LaserRangeFinder_Hokuyo_URG_04LX = 5
-  } LaserRangeFinderType;
-  
-  /**
-   * Enumerated type for valid grid cell states
-   */
-  typedef enum
-  {
-    GridStates_Unknown = 0,
-    GridStates_Occupied = 100,
-    GridStates_Free = 255
-  } GridStates;
-  
+/**
+ * Enumerated type for valid LaserRangeFinder types
+ */
+typedef enum {
+  LaserRangeFinder_Custom = 0,
+
+  LaserRangeFinder_Sick_LMS100 = 1,
+  LaserRangeFinder_Sick_LMS200 = 2,
+  LaserRangeFinder_Sick_LMS291 = 3,
+
+  LaserRangeFinder_Hokuyo_UTM_30LX = 4,
+  LaserRangeFinder_Hokuyo_URG_04LX = 5
+} LaserRangeFinderType;
+
+/**
+ * Enumerated type for valid grid cell states
+ */
+typedef enum { GridStates_Unknown = 0, GridStates_Occupied = 100, GridStates_Free = 255 } GridStates;
+
 }  // namespace KartoScanMatcher
 
-#endif // KARTO_SCAN_MATCHER_TYPES_H
+#endif  // KARTO_SCAN_MATCHER_TYPES_H

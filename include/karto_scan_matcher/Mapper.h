@@ -41,17 +41,14 @@ public:
    * Destructor
    */
   virtual ~ScanMatcher();
-    
+
 public:
   /**
    * Create a scan matcher with the given parameters
    */
-  static ScanMatcher* Create(Mapper* pMapper,
-                             kt_double searchSize,
-                             kt_double resolution,
-                             kt_double smearDeviation,
+  static ScanMatcher* Create(Mapper* pMapper, kt_double searchSize, kt_double resolution, kt_double smearDeviation,
                              kt_double rangeThreshold);
-    
+
   /**
    * Match given scan against set of scans
    * @param pScan scan being scan-matched
@@ -62,12 +59,9 @@ public:
    * @param doRefineMatch whether to do finer-grained matching if coarse match is good (default is true)
    * @return strength of response
    */
-  kt_double MatchScan(LocalizedRangeScan* pScan,
-                      const LocalizedRangeScanVector& rBaseScans,
-                      Pose2& rMean, Matrix3& rCovariance,
-                      kt_bool doPenalize = true,
-                      kt_bool doRefineMatch = true);
-    
+  kt_double MatchScan(LocalizedRangeScan* pScan, const LocalizedRangeScanVector& rBaseScans, Pose2& rMean,
+                      Matrix3& rCovariance, kt_bool doPenalize = true, kt_bool doRefineMatch = true);
+
   /**
    * Finds the best pose for the scan centering the search in the correlation grid
    * at the given pose and search in the space by the vector and angular offsets
@@ -84,17 +78,12 @@ public:
    * @param doingFineMatch whether to do a finer search after coarse search
    * @return strength of response
    */
-  kt_double CorrelateScan(LocalizedRangeScan* pScan,
-                          const Pose2& rSearchCenter,
+  kt_double CorrelateScan(LocalizedRangeScan* pScan, const Pose2& rSearchCenter,
                           const Vector2<kt_double>& rSearchSpaceOffset,
-                          const Vector2<kt_double>& rSearchSpaceResolution,
-                          kt_double searchAngleOffset,
-                          kt_double searchAngleResolution,
-                          kt_bool doPenalize,
-                          Pose2& rMean,
-                          Matrix3& rCovariance,
+                          const Vector2<kt_double>& rSearchSpaceResolution, kt_double searchAngleOffset,
+                          kt_double searchAngleResolution, kt_bool doPenalize, Pose2& rMean, Matrix3& rCovariance,
                           kt_bool doingFineMatch);
-    
+
   /**
    * Gets the correlation grid data (for debugging)
    * @return correlation grid
@@ -103,7 +92,7 @@ public:
   {
     return m_pCorrelationGrid;
   }
-    
+
 private:
   /**
    * Marks cells where scans' points hit as being occupied
@@ -111,7 +100,7 @@ private:
    * @param viewPoint do not add points that belong to scans "opposite" the view point
    */
   void AddScans(const LocalizedRangeScanVector& rScans, Vector2<kt_double> viewPoint);
-  
+
   /**
    * Marks cells where scans' points hit as being occupied.  Can smear points as they are added.
    * @param pScan scan whose points will mark cells in grid as being occupied
@@ -119,7 +108,7 @@ private:
    * @param doSmear whether the points will be smeared
    */
   void AddScan(LocalizedRangeScan* pScan, const Vector2<kt_double>& rViewPoint, kt_bool doSmear = true);
-  
+
   /**
    * Compute which points in a scan are on the same side as the given viewpoint
    * @param pScan
@@ -127,7 +116,7 @@ private:
    * @return points on the same side
    */
   PointVectorDouble FindValidPoints(LocalizedRangeScan* pScan, const Vector2<kt_double>& rViewPoint) const;
-  
+
   /**
    * Get response at given position for given rotation (only look up valid points)
    * @param angleIndex
@@ -135,25 +124,22 @@ private:
    * @return response
    */
   kt_double GetResponse(kt_int32u angleIndex, kt_int32s gridPositionIndex) const;
-    
+
 protected:
   /**
    * Default constructor
    */
   ScanMatcher(Mapper* pMapper)
-  : m_pMapper(pMapper)
-  , m_pCorrelationGrid(NULL)
-  , m_pSearchSpaceProbs(NULL)
-  , m_pGridLookup(NULL)
+    : m_pMapper(pMapper), m_pCorrelationGrid(NULL), m_pSearchSpaceProbs(NULL), m_pGridLookup(NULL)
   {
   }
-  
+
 private:
   Mapper* m_pMapper;
-  
+
   CorrelationGrid* m_pCorrelationGrid;
   Grid<kt_double>* m_pSearchSpaceProbs;
-  
+
   GridIndexLookup<kt_int8u>* m_pGridLookup;
 };  // ScanMatcher
 
@@ -247,7 +233,10 @@ private:
   const Mapper& operator=(const Mapper&);
 
 public:
-  void SetUseScanMatching(kt_bool val) { m_pUseScanMatching = val; }
+  void SetUseScanMatching(kt_bool val)
+  {
+    m_pUseScanMatching = val;
+  }
 
 private:
   kt_bool m_Initialized;
@@ -273,19 +262,19 @@ private:
   kt_double m_pCorrelationSearchSpaceResolution;
 
   kt_double m_pCorrelationSearchSpaceSmearDeviation;
-  
+
   kt_double m_pFineSearchAngleOffset;
-  
+
   kt_double m_pCoarseSearchAngleOffset;
 
   kt_double m_pCoarseAngleResolution;
-  
+
   kt_double m_DistanceVariancePenalty;
-  
+
   kt_double m_AngleVariancePenalty;
-  
+
   kt_double m_MinimumAnglePenalty;
-  
+
   kt_double m_MinimumDistancePenalty;
 
 public:
@@ -309,7 +298,7 @@ public:
   double getParamFineSearchAngleOffset();
   double getParamCoarseSearchAngleOffset();
   double getParamCoarseAngleResolution();
-  
+
   double getParamDistanceVariancePenalty();
   double getParamAngleVariancePenalty();
   double getParamMinimumAnglePenalty();
@@ -333,7 +322,7 @@ public:
   void setParamFineSearchAngleOffset(double d);
   void setParamCoarseSearchAngleOffset(double d);
   void setParamCoarseAngleResolution(double d);
-  
+
   void setParamDistanceVariancePenalty(double d);
   void setParamAngleVariancePenalty(double d);
   void setParamMinimumAnglePenalty(double d);

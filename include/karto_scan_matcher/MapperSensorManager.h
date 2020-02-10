@@ -111,7 +111,7 @@ public:
     // cap vector size and remove all scans from front of vector that are too far from end of vector
     kt_double squaredDistance = frontScanPose.GetPosition().SquaredDistance(backScanPose.GetPosition());
     while (m_RunningScans.size() > m_RunningBufferMaximumSize ||
-        squaredDistance > math::Square(m_RunningBufferMaximumDistance) - KT_TOLERANCE)
+           squaredDistance > math::Square(m_RunningBufferMaximumDistance) - KT_TOLERANCE)
     {
       // remove front of running scans
       m_RunningScans.erase(m_RunningScans.begin());
@@ -139,7 +139,7 @@ private:
 
   kt_int32u m_RunningBufferMaximumSize;
   kt_double m_RunningBufferMaximumDistance;
-};  // ScanManager  
+};  // ScanManager
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +148,7 @@ private:
 /**
  * Manages the devices for the mapper
  */
-class MapperSensorManager 
+class MapperSensorManager
 {
   typedef std::map<std::string, ScanManager*> ScanManagerMap;
 
@@ -157,9 +157,9 @@ public:
    * Constructor
    */
   MapperSensorManager(kt_int32u runningBufferMaximumSize, kt_double runningBufferMaximumDistance)
-  : m_RunningBufferMaximumSize(runningBufferMaximumSize)
-  , m_RunningBufferMaximumDistance(runningBufferMaximumDistance)
-  , m_NextScanId(0)
+    : m_RunningBufferMaximumSize(runningBufferMaximumSize)
+    , m_RunningBufferMaximumDistance(runningBufferMaximumDistance)
+    , m_NextScanId(0)
   {
   }
 

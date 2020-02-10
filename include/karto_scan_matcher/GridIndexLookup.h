@@ -38,10 +38,7 @@ public:
   /**
    * Constructs lookup array
    */
-  LookupArray()
-  : m_pArray(NULL)
-  , m_Capacity(0)
-  , m_Size(0)
+  LookupArray() : m_pArray(NULL), m_Capacity(0), m_Size(0)
   {
   }
 
@@ -86,7 +83,7 @@ public:
     {
       if (m_pArray != NULL)
       {
-        delete [] m_pArray;
+        delete[] m_pArray;
       }
       m_Capacity = size;
       m_pArray = new kt_int32s[m_Capacity];
@@ -100,7 +97,7 @@ public:
    * @param index
    * @return reference to value at index
    */
-  inline kt_int32s& operator [] (kt_int32u index)
+  inline kt_int32s& operator[](kt_int32u index)
   {
     assert(index < m_Size);
 
@@ -112,7 +109,7 @@ public:
    * @param index
    * @return value at index
    */
-  inline kt_int32s operator [] (kt_int32u index) const
+  inline kt_int32s operator[](kt_int32u index) const
   {
     assert(index < m_Size);
 
@@ -156,7 +153,7 @@ private:
  * to look up probability in probability grid!
  *
  */
-template<typename T>
+template <typename T>
 class GridIndexLookup
 {
 public:
@@ -164,11 +161,7 @@ public:
    * Construct a GridIndexLookup with a grid
    * @param pGrid
    */
-  GridIndexLookup(Grid<T>* pGrid)
-  : m_pGrid(pGrid)
-  , m_Capacity(0)
-  , m_Size(0)
-  , m_ppLookupArray(NULL)
+  GridIndexLookup(Grid<T>* pGrid) : m_pGrid(pGrid), m_Capacity(0), m_Size(0), m_ppLookupArray(NULL)
   {
   }
 
@@ -209,10 +202,8 @@ public:
    * @param angleOffset computes lookup arrays for the angles within this offset around angleStart
    * @param angleResolution how fine a granularity to compute lookup arrays in the angular space
    */
-  void ComputeOffsets(LocalizedRangeScan* pScan,
-            kt_double angleCenter,
-            kt_double angleOffset,
-            kt_double angleResolution)
+  void ComputeOffsets(LocalizedRangeScan* pScan, kt_double angleCenter, kt_double angleOffset,
+                      kt_double angleResolution)
   {
     assert(angleOffset != 0.0);
     assert(angleResolution != 0.0);
@@ -285,7 +276,6 @@ private:
         continue;
       }
 
-
       // counterclockwise rotation and that rotation is about the origin (0, 0).
       Vector2<kt_double> offset;
       offset.SetX(cosine * rPosition.GetX() - sine * rPosition.GetY());
@@ -352,12 +342,12 @@ private:
   kt_int32u m_Capacity;
   kt_int32u m_Size;
 
-  LookupArray **m_ppLookupArray;
+  LookupArray** m_ppLookupArray;
 
   // for sanity check
   std::vector<kt_double> m_Angles;
 };  // GridIndexLookup
-  
+
 }  // namespace KartoScanMatcher
 
 #endif  // KARTO_SCAN_MATCHER_GRID_INDEX_LOOKUP_H

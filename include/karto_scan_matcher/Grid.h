@@ -29,7 +29,7 @@ namespace KartoScanMatcher
 /**
  * Defines a grid class
  */
-template<typename T>
+template <typename T>
 class Grid
 {
 public:
@@ -54,7 +54,7 @@ public:
    */
   virtual ~Grid()
   {
-    delete [] m_pData;
+    delete[] m_pData;
     delete m_pCoordinateConverter;
   }
 
@@ -88,7 +88,7 @@ public:
    */
   virtual void Resize(kt_int32s width, kt_int32s height)
   {
-    m_Width = width;                                      // m_Width = 31
+    m_Width = width;  // m_Width = 31
     m_Height = height;
     m_WidthStep = math::AlignValue<kt_int32s>(width, 8);  // m_WidthStep = 32
 
@@ -109,7 +109,7 @@ public:
 
       m_pCoordinateConverter->SetSize(Size2<kt_int32s>(width, height));
     }
-    catch(...)
+    catch (...)
     {
       m_pData = NULL;
 
@@ -143,9 +143,8 @@ public:
       if (IsValidGridIndex(rGrid) == false)
       {
         std::stringstream error;
-        error << "Index out of range.  Index must be between [0; "
-            << m_Width << ") and [0; " << m_Height << ")";
-        throw (error.str());
+        error << "Index out of range.  Index must be between [0; " << m_Width << ") and [0; " << m_Height << ")";
+        throw(error.str());
       }
     }
 
@@ -396,23 +395,21 @@ protected:
    * @param width
    * @param height
    */
-  Grid(kt_int32s width, kt_int32s height)
-  : m_pData(NULL)
-  , m_pCoordinateConverter(NULL)
+  Grid(kt_int32s width, kt_int32s height) : m_pData(NULL), m_pCoordinateConverter(NULL)
   {
     Resize(width, height);
   }
 
 private:
-  kt_int32s m_Width;       // width of grid
-  kt_int32s m_Height;      // height of grid
-  kt_int32s m_WidthStep;   // 8 bit aligned width of grid
-  T* m_pData;              // grid data
+  kt_int32s m_Width;      // width of grid
+  kt_int32s m_Height;     // height of grid
+  kt_int32s m_WidthStep;  // 8 bit aligned width of grid
+  T* m_pData;             // grid data
 
   // coordinate converter to convert between world coordinates and grid coordinates
   CoordinateConverter* m_pCoordinateConverter;
 };  // Grid
-  
+
 }  //  namespace KartoScanMatcher
 
 #endif  // KARTO_SCAN_MATCHER_GRID_H

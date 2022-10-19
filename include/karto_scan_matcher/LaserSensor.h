@@ -378,8 +378,7 @@ public:
     {
       // see http://www.hizook.com/files/publications/SICK_LMS100.pdf
       // set range threshold to 18m
-      case LaserRangeFinder_Sick_LMS100:
-      {
+      case LaserRangeFinder_Sick_LMS100: {
         pLrf = new LaserRangeFinder((rName != "") ? rName : std::string("Sick LMS 100"));
 
         // Sensing range is 18 meters (at 10% reflectivity, max range of 20 meters), with an error of about 20mm
@@ -399,8 +398,7 @@ public:
 
       // see http://www.hizook.com/files/publications/SICK_LMS200-291_Tech_Info.pdf
       // set range threshold to 10m
-      case LaserRangeFinder_Sick_LMS200:
-      {
+      case LaserRangeFinder_Sick_LMS200: {
         pLrf = new LaserRangeFinder((rName != "") ? rName : std::string("Sick LMS 200"));
 
         // Sensing range is 80 meters
@@ -420,8 +418,7 @@ public:
 
       // see http://www.hizook.com/files/publications/SICK_LMS200-291_Tech_Info.pdf
       // set range threshold to 30m
-      case LaserRangeFinder_Sick_LMS291:
-      {
+      case LaserRangeFinder_Sick_LMS291: {
         pLrf = new LaserRangeFinder((rName != "") ? rName : std::string("Sick LMS 291"));
 
         // Sensing range is 80 meters
@@ -441,8 +438,7 @@ public:
 
       // see http://www.hizook.com/files/publications/Hokuyo_UTM_LaserRangeFinder_LIDAR.pdf
       // set range threshold to 30m
-      case LaserRangeFinder_Hokuyo_UTM_30LX:
-      {
+      case LaserRangeFinder_Hokuyo_UTM_30LX: {
         pLrf = new LaserRangeFinder((rName != "") ? rName : std::string("Hokuyo UTM-30LX"));
 
         // Sensing range is 30 meters
@@ -462,8 +458,7 @@ public:
 
       // see http://www.hizook.com/files/publications/HokuyoURG_Datasheet.pdf
       // set range threshold to 3.5m
-      case LaserRangeFinder_Hokuyo_URG_04LX:
-      {
+      case LaserRangeFinder_Hokuyo_URG_04LX: {
         pLrf = new LaserRangeFinder((rName != "") ? rName : std::string("Hokuyo URG-04LX"));
 
         // Sensing range is 4 meters. It has detection problems when
@@ -482,8 +477,7 @@ public:
       }
       break;
 
-      case LaserRangeFinder_Custom:
-      {
+      case LaserRangeFinder_Custom: {
         pLrf = new LaserRangeFinder((rName != "") ? rName : std::string("User-Defined LaserRangeFinder"));
 
         // Sensing range is 80 meters.
@@ -557,8 +551,8 @@ private:
   kt_int32u m_NumberOfRangeReadings;
 
   /**
-  * Sensor offset pose
-  */
+   * Sensor offset pose
+   */
   Pose2 m_pOffsetPose;
 
   std::string m_Name;

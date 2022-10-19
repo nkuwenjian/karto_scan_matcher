@@ -9,8 +9,8 @@
   <node pkg="karto_scan_matcher" type="karto_scan_matcher_node"
     name="karto_scan_matcher_node" output="screen">
   </node>
-  
-  <node pkg="rviz" type="rviz" name="rviz" 
+
+  <node pkg="rviz" type="rviz" name="rviz"
     args="-d $(find karto_scan_matcher)/launch/demo.rviz"/>
 
 </launch>

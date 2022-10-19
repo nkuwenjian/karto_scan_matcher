@@ -69,7 +69,8 @@ namespace KartoScanMatcher
 /**
  * Enumerated type for valid LaserRangeFinder types
  */
-typedef enum {
+typedef enum
+{
   LaserRangeFinder_Custom = 0,
 
   LaserRangeFinder_Sick_LMS100 = 1,
@@ -83,7 +84,12 @@ typedef enum {
 /**
  * Enumerated type for valid grid cell states
  */
-typedef enum { GridStates_Unknown = 0, GridStates_Occupied = 100, GridStates_Free = 255 } GridStates;
+typedef enum
+{
+  GridStates_Unknown = 0,
+  GridStates_Occupied = 100,
+  GridStates_Free = 255
+} GridStates;
 
 }  // namespace KartoScanMatcher
 
